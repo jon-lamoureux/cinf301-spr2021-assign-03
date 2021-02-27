@@ -1,0 +1,55 @@
+body {
+  background-color: rgb(30, 30, 30);
+  overflow: hidden;
+}
+
+td {
+    height: 100px;
+    display: inline-block;
+    width: 100px;
+    background-color: rgb(75, 75, 255);
+    text-align: center;
+    line-height: 100px;
+    font-size: 40px;
+    font-family: Arial;
+    margin: 2px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+#container {
+  width: 350px;
+  margin: auto;
+}
+
+h1 {
+  color: #fff;
+  font-family: Arial;
+  text-align: center;
+}
+
+button {
+  width: 200px;
+padding: 10px;
+background-color: rgb(50, 50, 175);
+color: #fff;
+font-weight: bold;
+margin-top: 10px;
+font-size: 15px;
+border-radius: 5px;
+cursor: pointer;
+}
+
+#condition {
+  text-align: center;
+  color: green;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: Arial;
+  display: none;
+}
+
+.text-container {
+  height: 40px;
+  margin: 10px 0;
+}
