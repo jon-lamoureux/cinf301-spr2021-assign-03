@@ -3,6 +3,7 @@ window.onload = function() {
     const rows = document.querySelectorAll('tr');
     const rowsArray = Array.from(rows);
     const answer = ["1", "2", "3", "8", "", "4", "7", "6", "5"];
+    var isMovable = 0;
 
     table.addEventListener('click', (event) => {
       const rowIndex = rowsArray.findIndex(row => row.contains(event.target));
@@ -18,7 +19,6 @@ window.onload = function() {
       const table = document.querySelector('table');
       const val1 = table.rows[i].cells[j].innerHTML;
       let k = j + 1;
-      let numRows = table.rows.length; // not used, but this gets num rows
       if (k > table.rows[i].cells.length - 1) {
           k = 0;
       }
@@ -27,6 +27,7 @@ window.onload = function() {
         if (table.rows[i - 1].cells[j].innerHTML == "") {
           table.rows[i].cells[j].innerHTML = "";
           table.rows[i - 1].cells[j].innerHTML = val1.toString();
+          isMovable = 1;
         }
       }
       // Check if blank element is below
@@ -34,6 +35,7 @@ window.onload = function() {
         if (table.rows[i + 1].cells[j].innerHTML == "") {
           table.rows[i].cells[j].innerHTML = "";
           table.rows[i + 1].cells[j].innerHTML = val1.toString();
+          isMovable = 1;
         }
       }
       // Check if blank element is to the right
@@ -41,6 +43,7 @@ window.onload = function() {
         if (table.rows[i].cells[j + 1].innerHTML == "") {
           table.rows[i].cells[j].innerHTML = "";
           table.rows[i].cells[j + 1].innerHTML = val1.toString();
+          isMovable = 1;
         }
       }
       // Check if blank element is to the left
@@ -48,6 +51,7 @@ window.onload = function() {
         if (table.rows[i].cells[j - 1].innerHTML == "") {
           table.rows[i].cells[j].innerHTML = "";
           table.rows[i].cells[j - 1].innerHTML = val1.toString();
+          isMovable = 1;
         }
       }
     }
@@ -80,7 +84,7 @@ window.onload = function() {
     // Shuffle the puzzle
     document.getElementById("shuffle").addEventListener("click", shufflePuzzle);
     function shufflePuzzle() {
-      var iterations = 249;
+      var iterations = 30;
       // Reset the puzzle to its answer state...weirdly.
       for (var i = 0; i < answer.length; i++) {
         k = i + 1;
@@ -94,10 +98,24 @@ window.onload = function() {
           document.querySelector("tr:nth-child(3) td:nth-child(" + k + ")").innerHTML = answer[i];
         }
       }
-      // Technically random selection -- but the switch_elens function will not allow for invalid movements.
+      // Technically random selection -- but the switch_elems function will not allow for invalid movements.
       for(var i = 0; i < iterations; i++) {
-        switch_elems(Math.floor(Math.random() * 3), Math.floor(Math.random() * 3));
+        isMovable = 0;
+        let rand1 = Math.floor(Math.random() * 3);
+        let rand2 = Math.floor(Math.random() * 3);
+        switch_elems(rand1, rand2);
+        if (isMovable == 0) {
+          i--;
+        } else {
+
+        }
       }
+      document.getElementById("condition").style.display = "none";
+    }
+
+    // Solve the Puzzle
+    document.getElementById("solve").addEventListener("click", solvePuzzle);
+    function solvePuzzle() {
       document.getElementById("condition").style.display = "none";
     }
 }
