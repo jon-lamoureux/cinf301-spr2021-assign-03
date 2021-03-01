@@ -3,7 +3,11 @@ window.onload = function() {
     const rows = document.querySelectorAll('tr');
     const rowsArray = Array.from(rows);
     const answer = ["1", "2", "3", "8", "", "4", "7", "6", "5"];
+    // I did not want to use global variables, but things got weird.
     var isMovable = 0;
+    var moveI = 0;
+    var moveJ = 0;
+    var history = [];
 
     table.addEventListener('click', (event) => {
       const rowIndex = rowsArray.findIndex(row => row.contains(event.target));
@@ -27,6 +31,8 @@ window.onload = function() {
         if (table.rows[i - 1].cells[j].innerHTML == "") {
           table.rows[i].cells[j].innerHTML = "";
           table.rows[i - 1].cells[j].innerHTML = val1.toString();
+          moveI = i - 1;
+          moveJ = j;
           isMovable = 1;
         }
       }
@@ -35,6 +41,8 @@ window.onload = function() {
         if (table.rows[i + 1].cells[j].innerHTML == "") {
           table.rows[i].cells[j].innerHTML = "";
           table.rows[i + 1].cells[j].innerHTML = val1.toString();
+          moveI = i + 1;
+          moveJ = j;
           isMovable = 1;
         }
       }
@@ -43,6 +51,8 @@ window.onload = function() {
         if (table.rows[i].cells[j + 1].innerHTML == "") {
           table.rows[i].cells[j].innerHTML = "";
           table.rows[i].cells[j + 1].innerHTML = val1.toString();
+          moveI = i;
+          moveJ = j + 1;
           isMovable = 1;
         }
       }
@@ -51,6 +61,8 @@ window.onload = function() {
         if (table.rows[i].cells[j - 1].innerHTML == "") {
           table.rows[i].cells[j].innerHTML = "";
           table.rows[i].cells[j - 1].innerHTML = val1.toString();
+          moveI = i;
+          moveJ = j - 1;
           isMovable = 1;
         }
       }
@@ -107,7 +119,7 @@ window.onload = function() {
         if (isMovable == 0) {
           i--;
         } else {
-
+            history[i] = moveI.toString() + moveJ.toString();
         }
       }
       document.getElementById("condition").style.display = "none";
@@ -116,6 +128,11 @@ window.onload = function() {
     // Solve the Puzzle
     document.getElementById("solve").addEventListener("click", solvePuzzle);
     function solvePuzzle() {
+      for (var i = history.length; 0 < i; i--) {
+        var rowi = history[i - 1].charAt(0);
+        var colj = history[i - 1].charAt(1);
+        switch_elems(parseInt(rowi), parseInt(colj));
+      }
       document.getElementById("condition").style.display = "none";
     }
 }
