@@ -133,17 +133,24 @@ window.onload = function() {
     // Solve the Puzzle
     document.getElementById("solve").addEventListener("click", solvePuzzle);
     function solvePuzzle() {
+      document.getElementById("solution").innerHTML = "";
       for (var i = history.length; 0 < i; i--) {
         var counter = history.length - i;
         var rowi = parseInt(history[i - 1].charAt(0));
         var colj = parseInt(history[i - 1].charAt(1));
         (function(counter, row, col) {
           setTimeout(function(){
+            let indexRow = row + 1;
+            let indexCol = col + 1;
+            var currStep = document.querySelector("tr:nth-child(" + indexRow +") td:nth-child(" + indexCol + ")").innerHTML;
             switch_elems(row, col);
+            let div = document.createElement('div');
+            div.innerHTML = currStep;
+            document.getElementById("solution").appendChild(div);
           },500*counter);
         })(counter, rowi, colj);
       }
-      setTimeout(function(){ alert("Puzzle has been solved!"); }, 15000);
+      setTimeout(function(){ alert("Puzzle has been solved!"); }, 15500);
       document.getElementById("condition").style.display = "none";
     }
 }

@@ -1,6 +1,5 @@
 body {
   background-color: rgb(30, 30, 30);
-  overflow: hidden;
 }
 
 td {
@@ -52,4 +51,18 @@ cursor: pointer;
 .text-container {
   height: 40px;
   margin: 10px 0;
+}
+
+#solution div {
+    height: 33px;
+    display: inline-block;
+    width: 33px;
+    background-color: rgb(75, 75, 255);
+    text-align: center;
+    line-height: 33px;
+    font-size: 28px;
+    font-family: Arial;
+    margin: 2px;
+    border: 1px solid #ccc;
+    cursor: pointer;
 }
