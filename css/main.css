@@ -54,15 +54,63 @@ cursor: pointer;
 }
 
 #solution div {
-    height: 33px;
-    display: inline-block;
-    width: 33px;
-    background-color: rgb(75, 75, 255);
-    text-align: center;
-    line-height: 33px;
-    font-size: 28px;
-    font-family: Arial;
-    margin: 2px;
-    border: 1px solid #ccc;
-    cursor: pointer;
+  height: 100px;
+  display: inline-block;
+  width: 100px;
+  background-color: rgb(75, 75, 255);
+  text-align: center;
+  line-height: 100px;
+  font-size: 40px;
+  font-family: Arial;
+  margin: 4px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+#left::after {
+    content: '';
+    position: absolute;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    padding: 6px;
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+    margin-left: -42px;
+    margin-top: 42px;
+}
+
+#right::after {
+    content: '';
+    position: absolute;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    padding: 6px;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    margin-left: 6px;
+    margin-top: 42px;
+}
+
+#up::after {
+    content: '';
+    position: absolute;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    padding: 6px;
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+    margin-left: -19px;
+    margin-top: 14px;
+}
+
+#down::after {
+    content: '';
+    position: absolute;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    padding: 6px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    margin-left: -19px;
+    margin-top: 70px;
 }

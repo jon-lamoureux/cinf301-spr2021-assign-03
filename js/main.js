@@ -8,6 +8,7 @@ window.onload = function() {
     var moveI = 0;
     var moveJ = 0;
     var history = [];
+    var result;
 
     table.addEventListener('click', (event) => {
       const rowIndex = rowsArray.findIndex(row => row.contains(event.target));
@@ -34,6 +35,7 @@ window.onload = function() {
           moveI = i - 1;
           moveJ = j;
           isMovable = 1;
+          result = "up";
         }
       }
       // Check if blank element is below
@@ -44,6 +46,7 @@ window.onload = function() {
           moveI = i + 1;
           moveJ = j;
           isMovable = 1;
+          result = "down";
         }
       }
       // Check if blank element is to the right
@@ -54,6 +57,7 @@ window.onload = function() {
           moveI = i;
           moveJ = j + 1;
           isMovable = 1;
+          result = "right";
         }
       }
       // Check if blank element is to the left
@@ -64,8 +68,10 @@ window.onload = function() {
           moveI = i;
           moveJ = j - 1;
           isMovable = 1;
+          result = "left";
         }
       }
+      return result;
     }
     function checkSolved() {
       // Check if function is solved
@@ -143,8 +149,10 @@ window.onload = function() {
             let indexRow = row + 1;
             let indexCol = col + 1;
             var currStep = document.querySelector("tr:nth-child(" + indexRow +") td:nth-child(" + indexCol + ")").innerHTML;
-            switch_elems(row, col);
+            let result = switch_elems(row, col);
             let div = document.createElement('div');
+            div.style.setProperty('--curr', '1');
+            div.id = result;
             div.innerHTML = currStep;
             document.getElementById("solution").appendChild(div);
           },500*counter);
