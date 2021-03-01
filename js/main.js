@@ -96,6 +96,7 @@ window.onload = function() {
     // Shuffle the puzzle
     document.getElementById("shuffle").addEventListener("click", shufflePuzzle);
     function shufflePuzzle() {
+      history = [];
       var iterations = 30;
       // Reset the puzzle to its answer state...weirdly.
       for (var i = 0; i < answer.length; i++) {
@@ -116,6 +117,10 @@ window.onload = function() {
         let rand1 = Math.floor(Math.random() * 3);
         let rand2 = Math.floor(Math.random() * 3);
         switch_elems(rand1, rand2);
+        if (history.length >= 1) {
+           var rowPrev = parseInt(history[i - 1].charAt(0));
+           var colPrev = parseInt(history[i - 1].charAt(1));
+        }
         if (isMovable == 0) {
           i--;
         } else {
