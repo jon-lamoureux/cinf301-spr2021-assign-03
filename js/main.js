@@ -129,10 +129,16 @@ window.onload = function() {
     document.getElementById("solve").addEventListener("click", solvePuzzle);
     function solvePuzzle() {
       for (var i = history.length; 0 < i; i--) {
-        var rowi = history[i - 1].charAt(0);
-        var colj = history[i - 1].charAt(1);
-        switch_elems(parseInt(rowi), parseInt(colj));
+        var counter = history.length - i;
+        var rowi = parseInt(history[i - 1].charAt(0));
+        var colj = parseInt(history[i - 1].charAt(1));
+        (function(counter, row, col) {
+          setTimeout(function(){
+            switch_elems(row, col);
+          },500*counter);
+        })(counter, rowi, colj);
       }
+      setTimeout(function(){ alert("Puzzle has been solved!"); }, 15000);
       document.getElementById("condition").style.display = "none";
     }
 }
