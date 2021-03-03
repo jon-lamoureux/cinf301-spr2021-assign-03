@@ -137,32 +137,12 @@ window.onload = function() {
 
     // Solve the Puzzle
     document.getElementById("solve").addEventListener("click", solvePuzzle);
-    /*function solvePuzzle() {
-      document.getElementById("solution").innerHTML = "";
-      for (var i = history.length; 0 < i; i--) {
-        var counter = history.length - i;
-        var rowi = parseInt(history[i - 1].charAt(0));
-        var colj = parseInt(history[i - 1].charAt(1));
-        (function(counter, row, col) {
-          setTimeout(function(){
-            let indexRow = row + 1;
-            let indexCol = col + 1;
-            var currStep = document.querySelector("tr:nth-child(" + indexRow +") td:nth-child(" + indexCol + ")").innerHTML;
-            let result = switch_elems(row, col);
-            let div = document.createElement('div');
-            div.id = result;
-            div.innerHTML = currStep;
-            document.getElementById("solution").appendChild(div);
-          },500*counter);
-        })(counter, rowi, colj);
-      }
-      setTimeout(function(){ alert("Puzzle has been solved!"); }, 15500);
-      document.getElementById("condition").style.display = "none";
-    }*/
     function solvePuzzle() {
       document.getElementById("solution").innerHTML = "";
       var x = history.length;
       var timedSolve = setInterval(function(){
+          document.getElementById("solve").disabled = true;
+          document.getElementById("shuffle").disabled = true;
           let rowi = parseInt(history[x - 1].charAt(0));
           let colj = parseInt(history[x - 1].charAt(1));
           let indexRow = rowi + 1;
@@ -177,6 +157,8 @@ window.onload = function() {
           if (x == 0) {
             document.getElementById("condition-2").style.display = "block";
             clearInterval(timedSolve);
+            document.getElementById("solve").disabled = false;
+            document.getElementById("shuffle").disabled = false;
           }
         },500);
       document.getElementById("condition").style.display = "none";
