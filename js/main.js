@@ -95,8 +95,10 @@ window.onload = function() {
       }
       if (solved == 1) {
         document.getElementById("condition").style.display = "block";
+        document.getElementById("condition-2").style.display = "none";
       } else {
         document.getElementById("condition").style.display = "none";
+        document.getElementById("condition-2").style.display = "none";
       }
     }
     // Shuffle the puzzle
@@ -122,23 +124,20 @@ window.onload = function() {
         isMovable = 0;
         let rand1 = Math.floor(Math.random() * 3);
         let rand2 = Math.floor(Math.random() * 3);
-        switch_elems(rand1, rand2);
-        if (history.length >= 1) {
-           var rowPrev = parseInt(history[i - 1].charAt(0));
-           var colPrev = parseInt(history[i - 1].charAt(1));
-        }
+        var result = switch_elems(rand1, rand2);
         if (isMovable == 0) {
           i--;
         } else {
-            history[i] = moveI.toString() + moveJ.toString();
+          history[i] = moveI.toString() + moveJ.toString();
         }
       }
       document.getElementById("condition").style.display = "none";
+      document.getElementById("condition-2").style.display = "none";
     }
 
     // Solve the Puzzle
     document.getElementById("solve").addEventListener("click", solvePuzzle);
-    function solvePuzzle() {
+    /*function solvePuzzle() {
       document.getElementById("solution").innerHTML = "";
       for (var i = history.length; 0 < i; i--) {
         var counter = history.length - i;
@@ -151,7 +150,6 @@ window.onload = function() {
             var currStep = document.querySelector("tr:nth-child(" + indexRow +") td:nth-child(" + indexCol + ")").innerHTML;
             let result = switch_elems(row, col);
             let div = document.createElement('div');
-            div.style.setProperty('--curr', '1');
             div.id = result;
             div.innerHTML = currStep;
             document.getElementById("solution").appendChild(div);
@@ -159,6 +157,28 @@ window.onload = function() {
         })(counter, rowi, colj);
       }
       setTimeout(function(){ alert("Puzzle has been solved!"); }, 15500);
+      document.getElementById("condition").style.display = "none";
+    }*/
+    function solvePuzzle() {
+      document.getElementById("solution").innerHTML = "";
+      var x = history.length;
+      var timedSolve = setInterval(function(){
+          let rowi = parseInt(history[x - 1].charAt(0));
+          let colj = parseInt(history[x - 1].charAt(1));
+          let indexRow = rowi + 1;
+          let indexCol = colj + 1;
+          var currStep = document.querySelector("tr:nth-child(" + indexRow +") td:nth-child(" + indexCol + ")").innerHTML;
+          switch_elems(rowi, colj);
+          let div = document.createElement('div');
+          div.id = result;
+          div.innerHTML = currStep;
+          document.getElementById("solution").appendChild(div);
+          x--;
+          if (x == 0) {
+            document.getElementById("condition-2").style.display = "block";
+            clearInterval(timedSolve);
+          }
+        },500);
       document.getElementById("condition").style.display = "none";
     }
 }
